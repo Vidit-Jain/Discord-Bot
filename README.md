@@ -13,7 +13,6 @@ To run this bot in your server, do the following:
 * In this .env file, add the following text
 '''
 DISCORD_TOKEN={Your Bot's token}
-DISCORD_GUILD={Name of your server}
 '''
 ## Run The Bot ##
 
