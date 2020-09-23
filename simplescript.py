@@ -67,10 +67,16 @@ def reidentify(_id, name):
     removeName(_id)
     selfIdentify(_id, name)
 
+
+async def parentErrorHandler(ctx):
+    f = open("errorResponses.txt", "r")
+    f1 = f.readlines()
+    await ctx.send(random.choice(f1))
+
 @bot.event
 async def on_command_error(ctx,error):
     if isinstance(error,commands.MissingRequiredArgument):
-        await ctx.send("Invalid syntax. Please try again")
+        await parentErrorHandler(ctx)
 
 @bot.event
 async def on_ready():
@@ -95,14 +101,14 @@ async def on_member_remove(member):
 
 @bot.command()
 async def ping(context):
-    'To get the time taken by the bot to reply'
+    '!ping'
 
     await context.send(f'{round(bot.latency * 1000)}ms')
 
 
 @bot.command(aliases=['8ball'])
 async def _8ball(context, *, q):
-    'A fun section where the bot predicts answers'
+    '!8ball <question>'
 
     res = list(open('8ballResponses.txt', 'r').readlines())
     await context.send(f'Question: {q}\nAnswer: {random.choice(res)}')
@@ -110,14 +116,14 @@ async def _8ball(context, *, q):
 
 @bot.command(aliases=['remove'])
 async def clear(ctx, amt=10):
-    'To remove some lines from the history'
+    '!clear <no-of-messages>'
 
     await ctx.channel.purge(limit=amt + 1)
 
 
 @bot.command(aliases=['selfid', 'sid'])
 async def selfidentify(ctx, *, name):
-    'You can add your identity from here'
+    '!selfidentify <Your name>'
 
     author = ctx.author
     if checkName(author):
@@ -131,20 +137,22 @@ async def selfidentify(ctx, *, name):
 
 @bot.command(aliases=['id'])
 async def identify(ctx):
-    'You can find any users identity from here if they have added it'
-
+    '!identify @handle'
     ans = ''
-    for person in ctx.message.mentions:
-        ans += f'{person} is {findName(person)}'
-    await ctx.send(ans)
+    if len(ctx.message.mentions) == 0:
+        await parentErrorHandler(ctx)
+    else:
+        for person in ctx.message.mentions:
+            ans += f'{person} is {findName(person)}'
+        await ctx.send(ans)
 
 
 @bot.command(aliases=['removeid', 'rid'])
 async def removeidentity(ctx):
-    'To remove your current identity'
-
+    '!removeidentity'
     _id = ctx.author.id
     await ctx.send(f'{ctx.author} {removeName(_id)}')
 
 
 bot.run(TOKEN)
+
