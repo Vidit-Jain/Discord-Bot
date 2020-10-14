@@ -8,64 +8,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-# GUILD = os.getenv('DISCORD_GUILD')
-# client = discord.Client()
 
 bot = commands.Bot(command_prefix = '!')
-
-
-# def checkName(author):
-#     'Returns true if the name is already present in the list, else returns false'
-
-#     with open("realNames.txt", "r") as f:
-#         for person in f:
-#             _id, name = tuple(person.split(" = ", 1))
-#             if str(author.id) == _id:
-#                 return True
-#     return False
-
-
-# def selfIdentify(_id, name):
-#     'Adds the name to the list'
-
-#     with open("realNames.txt", "a+") as f:
-#         f.write(f'{_id} = {name}\n')
-
-
-# def findName(person):
-#     'Gets the identified name of the mentioned user'
-
-#     with open("realNames.txt", "r+") as f:
-#         for entry in f:
-#             _id, name = entry.split(" = ", 1)
-#             if str(person.id) == _id:
-#                 return name
-#     return "not found\n"
-
-
-# def removeName(userId):
-#     'To remove the identity of the user'
-
-#     isPresent = False
-#     with open("realNames.txt", 'r') as f:
-#         with open("temp.txt", 'w') as fout:
-#             for person in f:
-#                 _id, name = person.split(' = ', 1)
-#                 if (str(userId)) == _id:
-#                     isPresent = True
-#                 else:
-#                     fout.write(person)
-#     if (isPresent):
-#         os.remove('realNames.txt')
-#         os.rename('temp.txt', 'realNames.txt')
-#         return "you are removed"
-
-#     return "your identity doesn't exist"
-
-
-# def reidentify(_id, name):
-#     removeName(_id)
-#     selfIdentify(_id, name)
 
 
 async def parentErrorHandler(ctx):
