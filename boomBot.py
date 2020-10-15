@@ -56,13 +56,7 @@ async def _8ball(context, *, q):
 
     res = list(open('8ballResponses.txt', 'r').readlines())
     await context.send(f'Question: {q}\nAnswer: {random.choice(res)}')
-
-
-@bot.command(aliases=['remove'])
-async def clear(ctx, amt=10):
-    '!clear <no-of-messages>'
-
-    await ctx.channel.purge(limit=amt + 1)
+    
 
 for fileName in os.listdir('./Cogs'):
     if fileName.endswith('.py'):
