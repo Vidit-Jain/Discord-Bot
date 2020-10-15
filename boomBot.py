@@ -56,7 +56,6 @@ async def _8ball(context, *, q):
 
     res = list(open('8ballResponses.txt', 'r').readlines())
     await context.send(f'Question: {q}\nAnswer: {random.choice(res)}')
-    
 
 for fileName in os.listdir('./Cogs'):
     if fileName.endswith('.py'):
