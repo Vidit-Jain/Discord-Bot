@@ -13,7 +13,7 @@ class Owner(commands.Cog):
     async def cog_check(self, ctx):
         'Check if user is bot owner'
 
-        return self.bot.is_owner(ctx.author)
+        return await self.bot.is_owner(ctx.author)
 
 
     def cogPresent(self, extension):
